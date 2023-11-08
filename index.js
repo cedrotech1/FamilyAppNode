@@ -59,31 +59,36 @@ const familyRoute = require('./route/family')
 app.use('/member', memberRoute);
 app.use('/family', familyRoute);
 
+  app.get('/', (req, res) => {
+    res.send("well come FA")
+
+  })
+
 // const uri = 'mongodb://127.0.0.1:27017/protofolio';
 // cedrick:<password>@cluster0.wtzj3ht.mongodb.net/?retryWrites=true&w=majority
-const x={
-  wellcame:"welcame mr"
-}
+// const x={
+//   wellcame:"welcame mr"
+// }
 
-  app.get('/', (req, res) => {
+//   app.get('/', (req, res) => {
 
-    const secret="am cedrick"
+//     const secret="am cedrick"
 
-    // const token=jwt.sign({name:"cedrick"},secret);
-    const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiY2VkcmljayIsImlhdCI6MTY4ODY0NTM4MH0.Ts_46b0jmU0fnAwunnoLLeeTVFj8Xt5iRIvfOIuX1Ck";
+//     // const token=jwt.sign({name:"cedrick"},secret);
+//     const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiY2VkcmljayIsImlhdCI6MTY4ODY0NTM4MH0.Ts_46b0jmU0fnAwunnoLLeeTVFj8Xt5iRIvfOIuX1Ck";
 
-    const decode=jwt.decode(token);
-    const verify=jwt.verify(token,secret,(err,ok)=>{
-      if(err)
-      {
-        console.log(err.message)
-      }else{
-         res.json({token,decode:decode,verify:verify});
-      }
-    })       
+//     const decode=jwt.decode(token);
+//     const verify=jwt.verify(token,secret,(err,ok)=>{
+//       if(err)
+//       {
+//         console.log(err.message)
+//       }else{
+//          res.json({token,decode:decode,verify:verify});
+//       }
+//     })       
 
-    res.json({token,decode:decode,verify:verify});
-  });
+//     res.json({token,decode:decode,verify:verify});
+//   });
   
 
 
