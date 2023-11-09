@@ -1,4 +1,4 @@
-const family=require("../models/family");
+
 const b=require("bcrypt");
 const jwt = require("jsonwebtoken");
 const uuid = require('uuid');
@@ -72,32 +72,63 @@ const Updatefamily = async (req, res) => {
     }
 }
 // const family = require("../models/family");
+const Family = require('../models/family'); // Adjust the path based on your file structure
 
 const join = async (req, res) => {
-  const batch = req.body.batch;
-  const memberid = req.body.memberid;
-  const familyid = req.body.familyid;
+  const familyId = req.body.familyId;
+  const name = req.body.name;
+  const newBio = req.body.newBio;
+  const memberId = req.body.memberId;
 
   try {
-    // Check if a family with the specified _id exists
-    const family = await family.findOne({ _id: familyid });
-
-    if (!family) {
-      return res.status(404).json({ error: 'Family not found for the provided familyid.' });
-    }
-
-    // Push the member ID into the family's members array
+    // const updatedFamily = await Family.findByIdAndUpdate(
+    //   familyId,
+    //   { $push: { members: memberId }, name: newName, bio: newBio },
+    //   { new: true }
+    // );
     const updatedFamily = await family.findByIdAndUpdate(
-      familyid,
-      { $push: { members: memberid } },
+      familyId,
+      { name: name },
       { new: true }
     );
 
-    res.status(200).json({ updatedFamily });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+    if (!updatedFamily) {
+      return res.status(404).send({ error: "Family not found" });
+    }
+
+    res.send({ updatedFamily });
+  } catch (err) {
+    res.status(500).send({ error: err.message });
   }
-};
+}
+
+
+// const join = async (req, res) => {
+//   const batch = req.body.batch;
+//   const memberid = req.body.memberid;
+//   const familyid = req.body.familyid;
+
+//   try {
+//     // Check if a family with the specified _id exists
+//     const family = await family.findOne({ _id: familyid });
+
+//     if (!family) {
+//       return res.status(404).json({ error: 'Family not found for the provided familyid.' });
+//     }
+
+//     // Push the member ID into the family's members array
+//     // const updatedFamily = await family.findByIdAndUpdate(
+//     //   familyid,
+//     //   { $push: { members: memberid } },
+//     //   { new: true }
+//     // );
+//     res.send("yes !")
+
+//     res.status(200).json({ updatedFamily });
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// };
 
 
 

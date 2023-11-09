@@ -17,9 +17,9 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-// const uri = 'mongodb://127.0.0.1:27017/protofolio';
+const uri = 'mongodb://127.0.0.1:27017/protofolio';
 
-const uri ="mongodb+srv://cedrick:cedrick@cluster0.wtzj3ht.mongodb.net/?retryWrites=true&w=majority";
+// const uri ="mongodb+srv://cedrick:cedrick@cluster0.wtzj3ht.mongodb.net/?retryWrites=true&w=majority";
 // const uri = 'mongodb+srv://cedrick:cedrick@cluster0.wtzj3ht.mongodb.net/?retryWrites=true&w=majority';
 // const mongoose = require('mongoose');
 // const connectionString = 'your-mongodb-connection-string'; // Replace with your actual connection string
@@ -60,6 +60,7 @@ app.use('/member', memberRoute);
 app.use('/family', familyRoute);
 
   app.get('/', (req, res) => {
+    
     res.send("well come FA")
 
   })
