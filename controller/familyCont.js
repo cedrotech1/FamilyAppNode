@@ -19,7 +19,7 @@ const Family=require("../models/family");
  
    try {
      const data = { name, bio, batch,admin };
-     const onemember = new family(data); // Assuming "family" is a valid Mongoose model
+     const onemember = new Family(data); // Assuming "family" is a valid Mongoose model
      const response = await onemember.save(); // Make sure your model is properly defined and connected to your database
  
      res.send({ response: response, rand: batch });
