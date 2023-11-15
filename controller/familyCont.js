@@ -34,7 +34,7 @@ const Family=require("../models/family");
   const newBatch = uuid.v4(); // Generate a new unique UUID
 
   try {
-    const updatedFamily = await family.findByIdAndUpdate(
+    const updatedFamily = await Family.findByIdAndUpdate(
       familyId,
       { batch: newBatch },
       { new: true }
@@ -60,7 +60,7 @@ const Updatefamily = async (req, res) => {
     const newBio = req.body.newBio;
     try {
       
-      const updatedFamily = await family.findByIdAndUpdate(familyId,{ name: newName, bio: newBio },{ new: true });
+      const updatedFamily = await Family.findByIdAndUpdate(familyId,{ name: newName, bio: newBio },{ new: true });
 
       if (!updatedFamily) {
         return res.status(404).send({ error: "Family not found" });
@@ -149,7 +149,7 @@ const join = async (req, res) => {
 
 const getList=async (req, res) => {
   try {
-    const data= await family.find();
+    const data= await Family.find();
       //  const data= await member.find({}, { fname: 1,lname: 1});
  res.send(data) 
   } catch (error) {
