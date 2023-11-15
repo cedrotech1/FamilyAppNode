@@ -110,9 +110,37 @@ const Delete = async (req, res) => {
 
 
 
+const Login = async (req, res) => {
+  try {
+    const usernamex = req.body.usernamex;
+    const passwordx = req.body.passwordx;
 
+    const memberData = await member.findOne({ username: usernamex }).select('password username fname lname');
 
+        if (!memberData) {
+          res.send({message:'invalid username!'});
+          return;
+        }
 
+        const storedPassword = memberData.password;
+  
+    // // Compare the provided password with the stored hashed password
+            const passwordMatch = await b.compare(passwordx, storedPassword);
+            if (passwordMatch) 
+            {
+              const secret="am cedrick";
+              // req.session.member=usernamex;
+              // console.log(req.session.member);
+               const token=jwt.sign({data:memberData},secret);
+              res.send({message:'Login successful!',token});
+            } else {
+              res.send({message:'Invalid  password'});
+            }
+
+  } catch (error) {
+    res.send(error);
+  }
+};
 
 
 
@@ -233,38 +261,7 @@ const getALL=async (req, res) => {
     })       
   }
 
-  const Login = async (req, res) => {
-    try {
-      const usernamex = req.body.usernamex;
-      const passwordx = req.body.passwordx;
-  
-      const memberData = await member.findOne({ username: usernamex }).select('password username fname lname');
-
-          if (!memberData) {
-            res.send({message:'invalid username!'});
-            return;
-          }
-
-          const storedPassword = memberData.password;
-    
-      // // Compare the provided password with the stored hashed password
-              const passwordMatch = await b.compare(passwordx, storedPassword);
-              if (passwordMatch) 
-              {
-                const secret="am cedrick";
-                // req.session.member=usernamex;
-                // console.log(req.session.member);
-                 const token=jwt.sign({data:memberData},secret);
-                res.send({message:'Login successful!',token});
-              } else {
-                res.send({message:'Invalid  password'});
-              }
-
-    } catch (error) {
-      res.send(error);
-    }
-  };
-  
+ 
 
 
 

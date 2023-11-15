@@ -94,7 +94,7 @@ app.use('/family', familyRoute);
 
 
 
-app.listen(3000, ()=>{
+app.listen(3200, ()=>{
     console.log("app server is runing on port 3000")
 })
 

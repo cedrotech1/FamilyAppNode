@@ -3,7 +3,11 @@ const familySchema= new mongoose.Schema({
     name:String,
     bio:String,
     batch:String,
-    admin:String
+    admin:String,
+    members:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'member',
+    }]
    
     // roomid:{
     //     type:mongoose.Schema.Types.ObjectId,
