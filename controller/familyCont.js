@@ -112,10 +112,9 @@ const join = async (req, res) => {
     const family = await Family.findById(familyid);
 
     // Check if the batch matches the family batch
-    if (familyid !== family._id) {
-      return res.status(400).json({ error: 'that family does not exist !' });
+    if (!family) {
+      return res.status(404).json({ error: 'Family not found for the provided familyid.' });
     }
-
 
     if (!family) {
       return res.status(404).json({ error: 'Family not found for the provided familyid.' });
